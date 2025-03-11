@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   const [loading, setloading] = useState(true);
@@ -25,7 +26,13 @@ function App() {
         setloading(false);
       });
   }, []);
-  return <></>;
+  return (
+    <>
+      <Header />
+
+      <Footer />
+    </>
+  );
 }
 
 export default App;
