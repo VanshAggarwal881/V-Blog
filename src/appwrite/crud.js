@@ -1,6 +1,7 @@
 import { Client, ID, Databases, Storage, Query } from "appwrite";
 import conf from "../envImport/conf.js";
 // CONFIGURATION FOR THE BLOG POSTS : HOW TO CREATE , UPDATE , DELETE and MORE.
+// coming after a long time : actually this file is reponsible for providng the data for blog that are need to be inserted inside the cards.
 export class Service {
   client = new Client();
   databases;
@@ -120,6 +121,7 @@ export class Service {
   }
 
   getFilePreview(fileId) {
+    // will be needing it when making a card , to preview from outside.
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
   }
 }

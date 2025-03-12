@@ -1,5 +1,7 @@
 // 1. create slice using redux , -> give it the initial state and reducers
 // 2. this slice is made to check if the user is authorised or not.
+
+// TODO: 3. will be using this functionality during making of login and signup components.
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -23,7 +25,7 @@ const authSlice = createSlice({
 Need to export two things reducers from Slicer
 authSlice.reducer 
 and 
-individual methods from reducers so that the components could use those to dispatch and what not
+* individual methods from reducers so that the components could use those to dispatch and what not
 */
 export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;
