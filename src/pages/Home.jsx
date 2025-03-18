@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import service from "../appwrite/crud";
 import PostCard from "../components/PostCard.jsx";
+import { useSelector } from "react-redux";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const user = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
-    service.getPosts().then((posts) => {
-      if (posts) {
-        setPosts(posts.documents);
-      }
-    });
-  });
-  if (posts.length === 0) {
+    if (user) {
+      service.getPosts().then((posts) => {
+        if (posts) {
+          setPosts(posts.documents);
+        }
+      });
+    }
+  }, [user]);
+  if (!user) {
     return (
       <div className="w-full py-8 mt-4 text-center">
         {/* this class can cause problems , be aware */}

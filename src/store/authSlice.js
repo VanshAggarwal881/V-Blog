@@ -6,14 +6,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   status: false,
-  usereData: null,
+  userData: null,
 };
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     login: (state, action) => {
-      (state.status = true), (state.usereData = action.payload.usereData);
+      // ! action.payload is the one .userData is when you send it by destructuring there ... I got error , either use . here or if not destructure there.
+      (state.status = true), (state.userData = action.payload.usereData);
     },
     logout: (state) => {
       state.status = false;

@@ -5,10 +5,12 @@ import { login, logout } from "./store/authSlice";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 
 function App() {
   const [loading, setloading] = useState(true);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   // useEffect : when the application is loaded ...ask whether the user is logged in or not
   useEffect(() => {
@@ -27,11 +29,11 @@ function App() {
       });
   }, []);
   return (
-    <>
+    <div>
       <Header />
-
+      <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }
 

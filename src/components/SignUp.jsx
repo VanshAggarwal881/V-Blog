@@ -12,12 +12,14 @@ function SignUp() {
   const { register, handleSubmit } = useForm();
   const [error, seterror] = useState("");
 
-  const create = async () => {
+  const create = async (data) => {
     seterror("");
     try {
       const userData = await authService.createAccount(data);
       if (userData) {
-        const currentUserData = authService.getCurrentUser();
+        // ! Create session after account creation by gpt
+        await authService.login({ email: data.email, password: data.password });
+        const currentUserData = await authService.getCurrentUser();
         if (currentUserData) dispatch(storeLogin(currentUserData));
         navigate("/");
       }
@@ -29,7 +31,7 @@ function SignUp() {
   return (
     <div className="flex items-center justify-center">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg  rounded-xl p-10 border border-black/10 bg-base-200 text-base-content`}
       >
         {/* <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
@@ -39,7 +41,7 @@ function SignUp() {
         <h2 className="text-center text-2xl font-bold leading-tight">
           Sign up to create account
         </h2>
-        <p className="mt-2 text-center text-base text-black/60">
+        <p className="mt-2 text-center text-base-500">
           Already have an account?&nbsp;
           <Link
             to="/login"

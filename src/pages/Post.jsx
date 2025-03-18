@@ -13,7 +13,7 @@ export default function Post() {
   const userData = useSelector((state) => state.auth.userData);
 
   // ? what userId ? when the post var is null in useState how come it got a userId ?
-  // ! I think it would be slug or anything .... I may be wrong but I didn't understand
+  // * its for the initial render , useeffect will provide it the value
   const isAuthor = post && userData ? post.userId === userData.$id : false;
 
   useEffect(() => {

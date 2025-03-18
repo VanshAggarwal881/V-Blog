@@ -42,9 +42,9 @@ function Login() {
             ! ICE BREAKING MOMENT : userdata is the data of the posts and blogs and blogs have to be displayed and displaying of blog will lead to change in state , so state management tool RTK comes in picture here : useDispatch time
              */
         if (userData) {
-          dispatch(storeLogin(userData));
+          dispatch(storeLogin({ userData }));
+          navigate("/");
         }
-        navigate("/");
       }
     } catch (error) {
       seterror(error.message);
@@ -53,7 +53,7 @@ function Login() {
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg rounded-xl p-10 border border-black/10 bg-base-200 text-base-content`}
       >
         {/* <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
@@ -63,7 +63,7 @@ function Login() {
         <h2 className="text-center text-2xl font-bold leading-tight">
           Sign in to your account
         </h2>
-        <p className="mt-2 text-center text-base text-black/60">
+        <p className="mt-2 text-center text-base-500">
           Don&apos;t have any account?&nbsp;
           <Link
             to="/signup"
