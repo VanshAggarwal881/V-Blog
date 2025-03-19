@@ -18,7 +18,7 @@ export default function Post() {
 
   useEffect(() => {
     if (slug) {
-      appwriteService.getPost(slug).then((post) => {
+      service.getPost(slug).then((post) => {
         if (post) setPost(post);
         else navigate("/");
       });
@@ -47,11 +47,9 @@ export default function Post() {
           {isAuthor && (
             <div className="absolute right-6 top-6">
               <Link to={`/edit-post/${post.$id}`}>
-                <button bgColor="bg-green-500" className="mr-3">
-                  Edit
-                </button>
+                <button className="btn btn-primary mr-3">Edit</button>
               </Link>
-              <button bgColor="bg-red-500" onClick={deletePost}>
+              <button className="btn btn-primary mr-3" onClick={deletePost}>
                 Delete
               </button>
             </div>

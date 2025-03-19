@@ -51,12 +51,15 @@ export class AuthService {
   // get current user / check authentication state
   async getCurrentUser() {
     try {
-      return await this.account.get();
+      const user = await this.account.get();
+      console.log("Fetched current user: ", user); // Add this
+      return user;
     } catch (error) {
+      console.log("Error getting current user", error); // Add this
       throw error;
     }
 
-    return null;
+    // return null;
   }
 
   async logout() {

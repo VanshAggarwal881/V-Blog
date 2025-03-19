@@ -30,17 +30,22 @@ export default function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
+    console.log("userData is", userData);
+    if (!userData) {
+      console.error("User is not authenticated");
+      return;
+    }
     // if cond. when updating the existing post
     if (post) {
       const file = data.image[0]
-        ? await appwriteService.uploadFile(data.image[0])
+        ? await service.uploadFile(data.image[0])
         : null;
 
       if (file) {
-        appwriteService.deleteFile(post.featuredImage);
+        service.deleteFile(post.featuredImage);
       }
 
-      const dbPost = await appwriteService.updatePost(post.$id, {
+      const dbPost = await service.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
@@ -49,13 +54,13 @@ export default function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      const file = await appwriteService.uploadFile(data.image[0]);
+      const file = await service.uploadFile(data.image[0]);
 
       if (file) {
         const fileId = file.$id;
         // update data's featuredimage with fileid
         data.featuredImage = fileId;
-        const dbPost = await appwriteService.createPost({
+        const dbPost = await service.createPost({
           ...data,
           userId: userData.$id,
         });
@@ -142,11 +147,7 @@ export default function PostForm({ post }) {
           className="mb-4"
           {...register("status", { required: true })}
         />
-        <button
-          type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
-          className="btn btn-outline btn-primary"
-        >
+        <button type="submit" className="btn btn-outline btn-primary">
           {post ? "Update" : "Submit"}
         </button>
       </div>

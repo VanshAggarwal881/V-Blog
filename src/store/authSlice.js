@@ -14,7 +14,7 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       // ! action.payload is the one .userData is when you send it by destructuring there ... I got error , either use . here or if not destructure there.
-      (state.status = true), (state.userData = action.payload.usereData);
+      (state.status = true), (state.userData = action.payload.userData);
     },
     logout: (state) => {
       state.status = false;

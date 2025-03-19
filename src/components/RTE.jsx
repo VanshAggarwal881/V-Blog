@@ -9,6 +9,8 @@ import { Controller } from "react-hook-form";
 */
 
 export default function RTE({ name, control, label, defaultValue = "" }) {
+  const tinyMCEApiKey = import.meta.env.VITE_TINY_MCE_API;
+
   return (
     <div className="w-full">
       {label && <label className="inline-block mb-1 pl-1">{label}</label>}
@@ -19,10 +21,12 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
         // how to render the editor and connect it to the form. It gives you onChange, value, etc., from RHF.
         render={({ field: { onChange } }) => (
           <Editor
+            apiKey={tinyMCEApiKey}
             initialValue={defaultValue}
             init={{
               initialValue: defaultValue,
               height: 500,
+
               menubar: true,
               plugins: [
                 "image",
