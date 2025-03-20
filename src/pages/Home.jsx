@@ -8,12 +8,15 @@ function Home() {
   const user = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
+    console.log("checking user for logout", user);
     if (user) {
       service.getPosts().then((posts) => {
         if (posts) {
           setPosts(posts.documents);
         }
       });
+    } else {
+      setPosts([]); // Clear posts when user logs out
     }
   }, [user]);
 
@@ -32,6 +35,10 @@ function Home() {
   return (
     <div className="w-full py-8">
       <div className="w-full max-w-7xl mx-auto px-4">
+        {user && posts.length === 0 && (
+          <p className="text-center text-gray-500">No posts found.</p>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {posts.map((post) => (
             <div key={post.$id} className="p-2">

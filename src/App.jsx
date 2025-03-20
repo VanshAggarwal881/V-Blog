@@ -1,16 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
 
 function App() {
   const [loading, setloading] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const authStatus = useSelector((state) => state.auth.status);
 
   // useEffect : when the application is loaded ...ask whether the user is logged in or not
   useEffect(() => {
@@ -27,7 +27,16 @@ function App() {
       .finally(() => {
         setloading(false);
       });
-  }, []);
+  }, [authStatus, dispatch, navigate]);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

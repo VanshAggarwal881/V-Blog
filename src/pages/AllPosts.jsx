@@ -3,21 +3,29 @@
 import React, { useState, useEffect } from "react";
 import service from "../appwrite/crud";
 import Postcard from "../components/PostCard.jsx";
+import { useSelector } from "react-redux";
 
 function AllPosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const user = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
-    service.getPosts([]).then((posts) => {
-      // TODO : clg the post , to see posts.documents
-      if (posts) {
-        console.log("consoling all posts :", posts.documents);
-        setPosts(posts.documents);
-      }
+    if (user) {
+      service.getPosts([]).then((posts) => {
+        // TODO : clg the post , to see posts.documents
+        if (posts) {
+          console.log("consoling all posts :", posts.documents);
+          setPosts(posts.documents);
+        }
+        setLoading(false);
+      });
+    } else {
+      // If user is not logged in
+      setPosts([]);
       setLoading(false);
-    });
-  }, []);
+    }
+  }, [user]);
 
   if (loading) {
     return (
@@ -27,6 +35,14 @@ function AllPosts() {
           <span className="loading loading-spinner loading-lg text-primary"></span>
           <p className="text-base-content">Loading posts...</p>
         </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-base-100">
+        <p className="text-xl text-gray-600">Login to view all posts</p>
       </div>
     );
   }

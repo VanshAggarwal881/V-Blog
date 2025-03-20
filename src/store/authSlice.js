@@ -18,6 +18,7 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.status = false;
+      state.userData = null; // Ensure userData is set to null on logout
     },
   }, // syntax
 });
