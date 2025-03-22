@@ -15,10 +15,8 @@ function SignUp() {
   const create = async (data) => {
     seterror("");
     try {
-      const userData = await authService.createAccount(data);
+      const userData = await authService.createAccount(data); // internally logs in
       if (userData) {
-        // ! Create session after account creation by gpt
-        await authService.login({ email: data.email, password: data.password });
         const currentUserData = await authService.getCurrentUser();
         if (currentUserData) dispatch(storeLogin(currentUserData));
         navigate("/");
