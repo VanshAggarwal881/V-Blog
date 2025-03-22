@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import service from "../appwrite/crud";
 import PostCard from "../components/PostCard.jsx";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setPosts, clearPosts } from "../store/postSlice.js";
 
 function Home() {
-  const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.userData);
+  const posts = useSelector((state) => state.post.posts);
 
   useEffect(() => {
     console.log("checking user for logout", user);
     if (user) {
-      service.getPosts().then((posts) => {
-        if (posts) {
-          setPosts(posts.documents);
-        }
+      service.getPosts().then((res) => {
+        if (res) dispatch(setPosts(res.documents));
       });
     } else {
-      setPosts([]); // Clear posts when user logs out
+      dispatch(clearPosts()); // clear posts on logout
     }
   }, [user]);
 
