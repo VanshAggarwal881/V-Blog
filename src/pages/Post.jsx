@@ -39,11 +39,11 @@ export default function Post() {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
           {/* Image Container */}
-          <div className="relative h-[400px] w-full overflow-hidden">
+          <div className="relative h-[400px] w-full overflow-hidden bg-base-200">
             <img
               src={service.getFilePreview(post.featuredImage)}
               alt={post.title}
-              className="w-full h-full object-cover rounded-t-xl"
+              className="w-full h-full object-contain rounded-t-xl"
             />
             {/* Author Actions */}
             {isAuthor && (
