@@ -76,7 +76,11 @@ function Header() {
             )}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl hover:border-white rounded-full">
+        <a
+          href="https://github.com/VanshAggarwal881/V-Blog"
+          target="_blank"
+          className="btn btn-ghost text-xl hover:border-white rounded-full"
+        >
           V-blog
         </a>
       </div>
