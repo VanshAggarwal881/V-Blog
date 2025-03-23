@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function ThemeToggler() {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    // Set initial theme from localStorage or default to light
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    setTheme(savedTheme);
+  }, []);
+
+  const handleThemeChange = (e) => {
+    const isChecked = e.target.checked;
+    const newTheme = isChecked ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
+
   return (
     <label className="swap swap-rotate mr-7">
-      {/* this hidden checkbox controls the state */}
-      <input type="checkbox" className="theme-controller" value="dark" />
+      <input
+        type="checkbox"
+        className="theme-controller"
+        checked={theme === "dark"}
+        onChange={handleThemeChange}
+      />
 
       {/* sun icon */}
       <svg
