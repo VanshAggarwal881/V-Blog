@@ -30,7 +30,7 @@ export default function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
-    console.log("userData is", userData);
+    // console.log("userData is", userData);
     if (!userData) {
       console.error("User is not authenticated");
       return;

@@ -12,7 +12,7 @@ function Home() {
   const posts = useSelector((state) => state.post.posts);
 
   useEffect(() => {
-    console.log("checking user for logout", user);
+    // console.log("checking user for logout", user);
     if (user) {
       service.getPosts().then((res) => {
         if (res) dispatch(setPosts(res.documents));

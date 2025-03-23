@@ -15,7 +15,7 @@ function AllPosts() {
       service.getPosts([]).then((posts) => {
         // TODO : clg the post , to see posts.documents
         if (posts) {
-          console.log("consoling all posts :", posts.documents);
+          // console.log("consoling all posts :", posts.documents);
           setPosts(posts.documents);
         }
         setLoading(false);

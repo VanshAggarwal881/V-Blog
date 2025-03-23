@@ -7,7 +7,7 @@ import Logout from "./Logout";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth?.status);
-  console.log(authStatus);
+  // console.log(authStatus);
   const navigate = useNavigate();
 
   const navItems = [
