@@ -99,13 +99,15 @@ export class Service {
 
   async uploadFile(file) {
     try {
-      return await this.bucket.createFile(
+      const response = await this.bucket.createFile(
         conf.appwriteBucketId,
         ID.unique(),
         file
       );
+      console.log("File upload response:", response);
+      return response;
     } catch (error) {
-      console.log("Appwrite serive :: uploadFile :: error", error);
+      console.error("Appwrite service :: uploadFile :: error", error);
       return false;
     }
   }
