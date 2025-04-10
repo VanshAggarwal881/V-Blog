@@ -124,7 +124,7 @@ export class Service {
 
   getFilePreview(fileId) {
     // will be needing it when making a card , to preview from outside.
-    return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+    return this.bucket.getFileView(conf.appwriteBucketId, fileId);
   }
 }
 
